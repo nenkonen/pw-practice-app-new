@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsComponent } from './forms.component';
 import { FormLayoutsComponent } from './form-layouts/form-layouts.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { AddMovieComponent } from './add-movie/add-movie.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'datepicker',
         component: DatepickerComponent,
+      },
+      {
+        path: 'add-movie',
+        component: AddMovieComponent,
       },
     ],
   },

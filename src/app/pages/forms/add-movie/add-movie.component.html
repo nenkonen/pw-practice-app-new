@@ -1,0 +1,210 @@
+<div class="row" *ngIf="!printMode">
+  <div class="col-md-8 offset-md-2">
+    <nb-card>
+      <nb-card-header>
+        <div class="d-flex justify-content-between align-items-center">
+          <span>Add a Movie</span>
+          <nb-icon icon="film-outline" status="primary"></nb-icon>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+
+          <!-- Title -->
+          <div class="form-group row">
+            <label for="title" class="label col-sm-3 col-form-label">Title *</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput fullWidth id="title" formControlName="title"
+                     placeholder="e.g. The Shawshank Redemption"
+                     [status]="submitted && f['title'].errors ? 'danger' : (submitted && !f['title'].errors ? 'success' : 'basic')">
+              <div *ngIf="submitted && f['title'].errors" class="error-message">
+                <span *ngIf="f['title'].errors['required']">Title is required.</span>
+                <span *ngIf="f['title'].errors['minlength']">Title must be at least 2 characters.</span>
+                <span *ngIf="f['title'].errors['maxlength']">Title cannot exceed 100 characters.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Director -->
+          <div class="form-group row">
+            <label for="director" class="label col-sm-3 col-form-label">Director *</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput fullWidth id="director" formControlName="director"
+                     placeholder="e.g. Frank Darabont"
+                     [status]="submitted && f['director'].errors ? 'danger' : (submitted && !f['director'].errors ? 'success' : 'basic')">
+              <div *ngIf="submitted && f['director'].errors" class="error-message">
+                <span *ngIf="f['director'].errors['required']">Director is required.</span>
+                <span *ngIf="f['director'].errors['minlength']">Director name must be at least 2 characters.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Genre -->
+          <div class="form-group row">
+            <label for="genre" class="label col-sm-3 col-form-label">Genre *</label>
+            <div class="col-sm-9">
+              <nb-select fullWidth id="genre" formControlName="genre" placeholder="Select genre"
+                         [status]="submitted && f['genre'].errors ? 'danger' : (submitted && !f['genre'].errors ? 'success' : 'basic')">
+                <nb-option value="Action">Action</nb-option>
+                <nb-option value="Comedy">Comedy</nb-option>
+                <nb-option value="Drama">Drama</nb-option>
+                <nb-option value="Horror">Horror</nb-option>
+                <nb-option value="Sci-Fi">Sci-Fi</nb-option>
+                <nb-option value="Thriller">Thriller</nb-option>
+                <nb-option value="Romance">Romance</nb-option>
+                <nb-option value="Documentary">Documentary</nb-option>
+                <nb-option value="Animation">Animation</nb-option>
+              </nb-select>
+              <div *ngIf="submitted && f['genre'].errors" class="error-message">
+                <span *ngIf="f['genre'].errors['required']">Genre is required.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Release Year -->
+          <div class="form-group row">
+            <label for="releaseYear" class="label col-sm-3 col-form-label">Release Year *</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput fullWidth id="releaseYear" formControlName="releaseYear"
+                     placeholder="e.g. 1994"
+                     [status]="submitted && f['releaseYear'].errors ? 'danger' : (submitted && !f['releaseYear'].errors ? 'success' : 'basic')">
+              <div *ngIf="submitted && f['releaseYear'].errors" class="error-message">
+                <span *ngIf="f['releaseYear'].errors['required']">Release year is required.</span>
+                <span *ngIf="f['releaseYear'].errors['pattern']">Enter a valid 4-digit year.</span>
+                <span *ngIf="f['releaseYear'].errors['min'] && !f['releaseYear'].errors['pattern']">Year must be 1888 or later.</span>
+                <span *ngIf="f['releaseYear'].errors['max'] && !f['releaseYear'].errors['pattern']">Year cannot be after 2030.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Duration -->
+          <div class="form-group row">
+            <label for="duration" class="label col-sm-3 col-form-label">Duration (min) *</label>
+            <div class="col-sm-9">
+              <input type="text" nbInput fullWidth id="duration" formControlName="duration"
+                     placeholder="e.g. 142"
+                     [status]="submitted && f['duration'].errors ? 'danger' : (submitted && !f['duration'].errors ? 'success' : 'basic')">
+              <div *ngIf="submitted && f['duration'].errors" class="error-message">
+                <span *ngIf="f['duration'].errors['required']">Duration is required.</span>
+                <span *ngIf="f['duration'].errors['pattern']">Enter a valid number.</span>
+                <span *ngIf="f['duration'].errors['min'] && !f['duration'].errors['pattern']">Duration must be at least 1 minute.</span>
+                <span *ngIf="f['duration'].errors['max'] && !f['duration'].errors['pattern']">Duration cannot exceed 600 minutes.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rating -->
+          <div class="form-group row">
+            <label for="rating" class="label col-sm-3 col-form-label">Rating (0-10) *</label>
+            <div class="col-sm-9">
+              <input type="number" nbInput fullWidth id="rating" formControlName="rating"
+                     placeholder="e.g. 9.3" step="0.1"
+                     [status]="submitted && f['rating'].errors ? 'danger' : (submitted && !f['rating'].errors ? 'success' : 'basic')">
+              <div *ngIf="submitted && f['rating'].errors" class="error-message">
+                <span *ngIf="f['rating'].errors['required']">Rating is required.</span>
+                <span *ngIf="f['rating'].errors['min']">Rating cannot be less than 0.</span>
+                <span *ngIf="f['rating'].errors['max']">Rating cannot be more than 10.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Language -->
+          <div class="form-group row">
+            <label for="language" class="label col-sm-3 col-form-label">Language *</label>
+            <div class="col-sm-9">
+              <nb-select fullWidth id="language" formControlName="language" placeholder="Select language"
+                         [status]="submitted && f['language'].errors ? 'danger' : (submitted && !f['language'].errors ? 'success' : 'basic')">
+                <nb-option value="English">English</nb-option>
+                <nb-option value="Spanish">Spanish</nb-option>
+                <nb-option value="French">French</nb-option>
+                <nb-option value="German">German</nb-option>
+                <nb-option value="Japanese">Japanese</nb-option>
+                <nb-option value="Korean">Korean</nb-option>
+                <nb-option value="Bulgarian">Bulgarian</nb-option>
+                <nb-option value="Other">Other</nb-option>
+              </nb-select>
+              <div *ngIf="submitted && f['language'].errors" class="error-message">
+                <span *ngIf="f['language'].errors['required']">Language is required.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="form-group row">
+            <label for="description" class="label col-sm-3 col-form-label">Description *</label>
+            <div class="col-sm-9">
+              <textarea nbInput fullWidth id="description" formControlName="description"
+                        placeholder="Brief description of the movie (10-500 characters)" rows="4"
+                        [status]="submitted && f['description'].errors ? 'danger' : (submitted && !f['description'].errors ? 'success' : 'basic')">
+              </textarea>
+              <div *ngIf="submitted && f['description'].errors" class="error-message">
+                <span *ngIf="f['description'].errors['required']">Description is required.</span>
+                <span *ngIf="f['description'].errors['minlength']">Description must be at least 10 characters.</span>
+                <span *ngIf="f['description'].errors['maxlength']">Description cannot exceed 500 characters.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="form-group row">
+            <div class="offset-sm-3 col-sm-9 button-group">
+              <button type="submit" nbButton status="primary">
+                <nb-icon icon="checkmark-outline"></nb-icon> Submit
+              </button>
+              <button type="button" nbButton status="warning" (click)="onReset()">
+                <nb-icon icon="refresh-outline"></nb-icon> Reset
+              </button>
+              <button type="button" nbButton status="info" (click)="onPrint()">
+                <nb-icon icon="printer-outline"></nb-icon> Print Film
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Success card shown after valid submit -->
+    <nb-card *ngIf="submitted && movieForm.valid" accent="success">
+      <nb-card-header>Movie Submitted Successfully</nb-card-header>
+      <nb-card-body>
+        <div class="movie-summary">
+          <div class="row">
+            <div class="col-sm-6"><strong>Title:</strong> {{ movieForm.value.title }}</div>
+            <div class="col-sm-6"><strong>Director:</strong> {{ movieForm.value.director }}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6"><strong>Genre:</strong> {{ movieForm.value.genre }}</div>
+            <div class="col-sm-6"><strong>Year:</strong> {{ movieForm.value.releaseYear }}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6"><strong>Duration:</strong> {{ movieForm.value.duration }} min</div>
+            <div class="col-sm-6"><strong>Rating:</strong> {{ movieForm.value.rating }} / 10</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6"><strong>Language:</strong> {{ movieForm.value.language }}</div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-sm-12"><strong>Description:</strong> {{ movieForm.value.description }}</div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+<!-- Print-only view -->
+<div *ngIf="printMode" class="print-view">
+  <h2>Movie Details</h2>
+  <hr>
+  <table class="print-table">
+    <tr><td class="print-label">Title</td><td>{{ movieForm.value.title }}</td></tr>
+    <tr><td class="print-label">Director</td><td>{{ movieForm.value.director }}</td></tr>
+    <tr><td class="print-label">Genre</td><td>{{ movieForm.value.genre }}</td></tr>
+    <tr><td class="print-label">Release Year</td><td>{{ movieForm.value.releaseYear }}</td></tr>
+    <tr><td class="print-label">Duration</td><td>{{ movieForm.value.duration }} minutes</td></tr>
+    <tr><td class="print-label">Rating</td><td>{{ movieForm.value.rating }} / 10</td></tr>
+    <tr><td class="print-label">Language</td><td>{{ movieForm.value.language }}</td></tr>
+    <tr><td class="print-label">Description</td><td>{{ movieForm.value.description }}</td></tr>
+  </table>
+</div>

@@ -16,7 +16,9 @@ import { FormsRoutingModule } from './forms-routing.module';
 import { FormsComponent } from './forms.component';
 import { FormLayoutsComponent } from './form-layouts/form-layouts.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
+import { AddMovieComponent } from './add-movie/add-movie.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -33,11 +35,13 @@ import { FormsModule as ngFormsModule } from '@angular/forms';
     NbSelectModule,
     NbIconModule,
     ngFormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     FormsComponent,
     FormLayoutsComponent,
     DatepickerComponent,
+    AddMovieComponent,
   ],
 })
 export class FormsModule { }

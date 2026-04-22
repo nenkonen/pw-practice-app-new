@@ -1,0 +1,46 @@
+.error-message {
+  color: #ff3d71;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.button-group {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.movie-summary .row {
+  padding: 0.35rem 0;
+}
+
+.print-view {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+.print-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    border-bottom: 1px solid #eee;
+  }
+
+  td {
+    padding: 0.6rem 1rem;
+    vertical-align: top;
+  }
+
+  .print-label {
+    font-weight: bold;
+    width: 150px;
+    color: #333;
+  }
+}
+
+@media print {
+  .print-view {
+    display: block !important;
+  }
+}
