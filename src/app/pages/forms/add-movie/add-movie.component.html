@@ -34,7 +34,7 @@
                      [status]="submitted && f['director'].errors ? 'danger' : (submitted && !f['director'].errors ? 'success' : 'basic')">
               <div *ngIf="submitted && f['director'].errors" class="error-message">
                 <span *ngIf="f['director'].errors['required']">Director is required.</span>
-                <span *ngIf="f['director'].errors['minlength']">Director name must be at least 2 characters.</span>
+                <span *ngIf="f['director'].errors['minlength']">Director name Mmust be at least 2 characters.</span>
               </div>
             </div>
           </div>
