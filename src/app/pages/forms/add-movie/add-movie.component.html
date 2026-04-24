@@ -3,8 +3,13 @@
     <nb-card>
       <nb-card-header>
         <div class="d-flex justify-content-between align-items-center">
-          <span>Add a Movie</span>
-          <nb-icon icon="film-outline" status="primary"></nb-icon>
+          <span>{{ editMode ? 'Edit Movie' : 'Add a Movie' }}</span>
+          <div class="d-flex align-items-center" style="gap: 0.5rem;">
+            <button nbButton ghost status="basic" size="small" (click)="goToMovieList()">
+              <nb-icon icon="list-outline"></nb-icon> Movie List
+            </button>
+            <nb-icon icon="film-outline" status="primary"></nb-icon>
+          </div>
         </div>
       </nb-card-header>
       <nb-card-body>
@@ -149,7 +154,7 @@
           <div class="form-group row">
             <div class="offset-sm-3 col-sm-9 button-group">
               <button type="submit" nbButton status="primary">
-                <nb-icon icon="checkmark-outline"></nb-icon> Submit
+                <nb-icon icon="checkmark-outline"></nb-icon> {{ editMode ? 'Update' : 'Submit' }}
               </button>
               <button type="button" nbButton status="warning" (click)="onReset()">
                 <nb-icon icon="refresh-outline"></nb-icon> Reset
@@ -164,9 +169,14 @@
       </nb-card-body>
     </nb-card>
 
-    <!-- Success card shown after valid submit -->
+    <!-- Success message -->
+    <nb-card *ngIf="successMessage" accent="success">
+      <nb-card-header>{{ successMessage }}</nb-card-header>
+    </nb-card>
+
+    <!-- Movie details shown after valid submit -->
     <nb-card *ngIf="submitted && movieForm.valid" accent="success">
-      <nb-card-header>Movie Submitted Successfully</nb-card-header>
+      <nb-card-header>Movie Details</nb-card-header>
       <nb-card-body>
         <div class="movie-summary">
           <div class="row">

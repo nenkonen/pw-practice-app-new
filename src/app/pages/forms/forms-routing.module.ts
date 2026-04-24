@@ -5,6 +5,7 @@ import { FormsComponent } from './forms.component';
 import { FormLayoutsComponent } from './form-layouts/form-layouts.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'add-movie',
         component: AddMovieComponent,
+      },
+      {
+        path: 'movie-list',
+        component: MovieListComponent,
       },
     ],
   },

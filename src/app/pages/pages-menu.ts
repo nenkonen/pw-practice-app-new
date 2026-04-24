@@ -27,6 +27,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: 'Add Movie',
         link: '/pages/forms/add-movie',
       },
+      {
+        title: 'Movie List',
+        link: '/pages/forms/movie-list',
+      },
     ],
   },
   {

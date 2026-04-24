@@ -1,0 +1,103 @@
+.filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  align-items: center;
+}
+
+.filter-item {
+  flex-shrink: 0;
+}
+
+.search-box {
+  flex: 1 1 220px;
+  min-width: 180px;
+}
+
+.year-box {
+  flex: 0 0 100px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+
+  .add-link {
+    color: #3366ff;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.movie-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  th, td {
+    padding: 0.65rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #edf1f7;
+    white-space: nowrap;
+  }
+
+  th {
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: #8f9bb3;
+    text-transform: uppercase;
+
+    nb-icon {
+      font-size: 0.85rem;
+      vertical-align: middle;
+    }
+
+    &.sortable {
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        color: #3366ff;
+      }
+    }
+  }
+
+  tbody tr:hover {
+    background: rgba(51, 102, 255, 0.04);
+  }
+}
+
+.actions-cell {
+  white-space: nowrap;
+
+  button {
+    margin-right: 0.15rem;
+  }
+}
+
+.pagination-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.page-info {
+  font-size: 0.875rem;
+  color: #8f9bb3;
+}
+
+.page-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.movie-detail .row {
+  padding: 0.35rem 0;
+}

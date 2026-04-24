@@ -8,6 +8,7 @@ import {
   NbInputModule,
   NbRadioModule,
   NbSelectModule,
+  NbTooltipModule,
   NbUserModule,
 } from '@nebular/theme';
 
@@ -17,6 +18,7 @@ import { FormsComponent } from './forms.component';
 import { FormLayoutsComponent } from './form-layouts/form-layouts.component';
 import { DatepickerComponent } from './datepicker/datepicker.component';
 import { AddMovieComponent } from './add-movie/add-movie.component';
+import { MovieListComponent } from './movie-list/movie-list.component';
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -34,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsRoutingModule,
     NbSelectModule,
     NbIconModule,
+    NbTooltipModule,
     ngFormsModule,
     ReactiveFormsModule,
   ],
@@ -42,6 +45,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormLayoutsComponent,
     DatepickerComponent,
     AddMovieComponent,
+    MovieListComponent,
   ],
 })
 export class FormsModule { }

@@ -1,0 +1,146 @@
+<div class="row">
+  <div class="col-12">
+    <nb-card>
+      <nb-card-header>
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+          <span>Movie List</span>
+          <button nbButton status="primary" size="small" (click)="goToAddMovie()">
+            <nb-icon icon="plus-outline"></nb-icon> Add Movie
+          </button>
+        </div>
+      </nb-card-header>
+
+      <nb-card-body>
+        <!-- Search & Filters -->
+        <div class="filters-row">
+          <div class="filter-item search-box">
+            <input type="text" nbInput fullWidth placeholder="Search by title..."
+                   [(ngModel)]="searchText" (ngModelChange)="applyFilters()">
+          </div>
+          <div class="filter-item">
+            <nb-select placeholder="Genre" [(ngModel)]="filterGenre" (selectedChange)="applyFilters()">
+              <nb-option [value]="''">All Genres</nb-option>
+              <nb-option *ngFor="let g of genres" [value]="g">{{ g }}</nb-option>
+            </nb-select>
+          </div>
+          <div class="filter-item">
+            <nb-select placeholder="Language" [(ngModel)]="filterLanguage" (selectedChange)="applyFilters()">
+              <nb-option [value]="''">All Languages</nb-option>
+              <nb-option *ngFor="let l of languages" [value]="l">{{ l }}</nb-option>
+            </nb-select>
+          </div>
+          <div class="filter-item year-box">
+            <input type="text" nbInput fullWidth placeholder="Year"
+                   [(ngModel)]="filterYear" (ngModelChange)="applyFilters()">
+          </div>
+          <div class="filter-item">
+            <button nbButton ghost status="basic" size="small" (click)="clearFilters()">
+              <nb-icon icon="close-outline"></nb-icon> Clear
+            </button>
+          </div>
+        </div>
+
+        <!-- Empty state -->
+        <div *ngIf="filteredMovies.length === 0" class="empty-state">
+          <nb-icon icon="film-outline" style="font-size: 3rem; color: #8f9bb3;"></nb-icon>
+          <p class="mt-3">No movies available. <a (click)="goToAddMovie()" class="add-link">Add your first movie.</a></p>
+        </div>
+
+        <!-- Table -->
+        <div *ngIf="filteredMovies.length > 0" class="table-responsive">
+          <table class="movie-table">
+            <thead>
+              <tr>
+                <th class="sortable" (click)="toggleSort('title')">
+                  Title <nb-icon [icon]="getSortIcon('title')"></nb-icon>
+                </th>
+                <th>Director</th>
+                <th>Genre</th>
+                <th class="sortable" (click)="toggleSort('releaseYear')">
+                  Year <nb-icon [icon]="getSortIcon('releaseYear')"></nb-icon>
+                </th>
+                <th>Duration</th>
+                <th class="sortable" (click)="toggleSort('rating')">
+                  Rating <nb-icon [icon]="getSortIcon('rating')"></nb-icon>
+                </th>
+                <th>Language</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let movie of pagedMovies">
+                <td>{{ movie.title }}</td>
+                <td>{{ movie.director }}</td>
+                <td>{{ movie.genre }}</td>
+                <td>{{ movie.releaseYear }}</td>
+                <td>{{ movie.duration }} min</td>
+                <td>{{ movie.rating }}/10</td>
+                <td>{{ movie.language }}</td>
+                <td class="actions-cell">
+                  <button nbButton ghost status="info" size="tiny" nbTooltip="View" (click)="viewMovie(movie)">
+                    <nb-icon icon="eye-outline"></nb-icon>
+                  </button>
+                  <button nbButton ghost status="primary" size="tiny" nbTooltip="Edit" (click)="editMovie(movie)">
+                    <nb-icon icon="edit-2-outline"></nb-icon>
+                  </button>
+                  <button nbButton ghost status="danger" size="tiny" nbTooltip="Delete" (click)="deleteMovie(movie)">
+                    <nb-icon icon="trash-2-outline"></nb-icon>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div *ngIf="filteredMovies.length > 0" class="pagination-row">
+          <span class="page-info">
+            Page {{ currentPage }} of {{ totalPages }}
+            ({{ filteredMovies.length }} movie{{ filteredMovies.length !== 1 ? 's' : '' }})
+          </span>
+          <div class="page-buttons">
+            <button nbButton outline size="small" status="basic"
+                    [disabled]="currentPage <= 1" (click)="prevPage()">
+              <nb-icon icon="arrow-back-outline"></nb-icon> Prev
+            </button>
+            <button nbButton outline size="small" status="basic"
+                    [disabled]="currentPage >= totalPages" (click)="nextPage()">
+              Next <nb-icon icon="arrow-forward-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+
+    <!-- Detail View Modal-style card -->
+    <nb-card *ngIf="selectedMovie" accent="info">
+      <nb-card-header>
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{ selectedMovie.title }}</span>
+          <button nbButton ghost status="basic" size="small" (click)="closeDetail()">
+            <nb-icon icon="close-outline"></nb-icon>
+          </button>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="movie-detail">
+          <div class="row">
+            <div class="col-sm-6"><strong>Director:</strong> {{ selectedMovie.director }}</div>
+            <div class="col-sm-6"><strong>Genre:</strong> {{ selectedMovie.genre }}</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6"><strong>Release Year:</strong> {{ selectedMovie.releaseYear }}</div>
+            <div class="col-sm-6"><strong>Duration:</strong> {{ selectedMovie.duration }} min</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6"><strong>Rating:</strong> {{ selectedMovie.rating }} / 10</div>
+            <div class="col-sm-6"><strong>Language:</strong> {{ selectedMovie.language }}</div>
+          </div>
+          <div class="row mt-2">
+            <div class="col-12"><strong>Description:</strong> {{ selectedMovie.description }}</div>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
