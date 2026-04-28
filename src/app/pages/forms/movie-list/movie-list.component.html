@@ -19,13 +19,13 @@
           </div>
           <div class="filter-item">
             <nb-select placeholder="Genre" [(ngModel)]="filterGenre" (selectedChange)="applyFilters()">
-              <nb-option [value]="''">All Genres</nb-option>
+              <nb-option [value]="''">All Genres </nb-option>
               <nb-option *ngFor="let g of genres" [value]="g">{{ g }}</nb-option>
             </nb-select>
           </div>
           <div class="filter-item">
             <nb-select placeholder="Language" [(ngModel)]="filterLanguage" (selectedChange)="applyFilters()">
-              <nb-option [value]="''">All Languages</nb-option>
+              <nb-option [value]="''">All Languages </nb-option>
               <nb-option *ngFor="let l of languages" [value]="l">{{ l }}</nb-option>
             </nb-select>
           </div>
